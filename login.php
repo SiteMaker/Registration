@@ -8,7 +8,8 @@
       // Логин существует
       if(password_verify($data['password'], $user->password)){
         // Все хорошо, логиним пользрвателя
-        
+        $_SESSION['logged_user'] = $user;
+        echo '<div style="color: green;">Вы авторизованы!<br/>Можете перейти на <a href="/">главную</a> страницу!</div><hr>';
       }else{
         $errors[] = 'Неверный пароль!';
       }
