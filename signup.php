@@ -16,6 +16,12 @@
     if($data['password_2'] != $data['password']){
       $errors[] = "Повторный пароль введен не верно!";
     }
+    if(R::count('users', "login = ?", array($data['login'])) > 0){
+      $errors[] = "Пользователь с таким логином уже существует!";
+    }
+    if(R::count('users', "email = ?", array($data['email'])) > 0){
+      $errors[] = "Пользователь с таким Email уже существует!";
+    }
     if(empty($errors)){
       // Все хорошо, регистритуем
       $user = R::dispense('users');
@@ -26,8 +32,7 @@
       echo '<div style="color: green;">Вы успешно зарегистрированы!</div><hr>';
     }else{
       echo '<div style="color: red;">'.array_shift($errors).'</div><hr>';
-    }
-    
+    }    
   }
 ?>
 
